@@ -70,41 +70,43 @@
 
         <p>Apply Here</p>
         <div class="container">
-        <form method="post" action="apply">
+        <form method="post" action="apply" enctype="multipart/form-data">
                             {{ csrf_field() }}
     <div class="form-group row">
     <label for="staticEmail" class="col-sm-2 col-form-label">First Name</label>
-    <div class="col-sm-10">
-    <input type="text" class="form-control" name="firstname" id="" placeholder="">
+    <div class="col-sm-6">
+    <input type="text" class="form-control" name="fristName" id="" placeholder="">
     </div>
   </div>
     <div class="form-group row">
     <label for="" class="col-sm-2 col-form-label">Surame</label>
-    <div class="col-sm-10">
+    <div class="col-sm-6">
     <input type="text" class="form-control" name="surname" id="" placeholder="">
     </div>
   </div>
   
   <div class="form-group row">
     <label for="" class="col-sm-2 col-form-label">Phone Number</label>
-    <div class="col-sm-10">
+    <div class="col-sm-6">
     <input type="number" class="form-control" name="phone" id="" placeholder="">
     </div>
   </div>
 
-  <div class="form-group">
-    <label for="exampleFormControlInput1">Email address</label>
-    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
+  <div class="form-group row">
+    <label for="" class="col-sm-2 col-form-label">Email</label>
+    <div class="col-sm-6">
+    <input type="email" name="email" class="form-control"  id="" placeholder="">
+    </div>
   </div>
   <div class="form-group row">
     <label for="" class="col-sm-2 col-form-label">Cover Letter</label>
-    <div class="col-sm-10">
-    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
+    <div class="col-sm-6">
+    <textarea class="form-control" name="coverLetter" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>
   </div>
   <div class="form-group">
     <label for="exampleFormControlFile1">Passport Photograph</label> 
-    <input type="file" name="photo" class="form-control-file" id="exampleFormControlFile1">
+    <input type="file" name="photograph" class="form-control-file" id="exampleFormControlFile1">
   </div>
   <div class="form-group">
     <label for="exampleFormControlFile1">Upload CV</label>
@@ -113,7 +115,7 @@
 
   <div class="form-group row">
 
-    <div class="col-sm-10">
+    <div class="col-sm-6">
     <button class="btn btn-primary" type="submit">Apply</button>
     </div>
   </div>

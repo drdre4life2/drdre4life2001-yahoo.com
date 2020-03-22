@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Applicant;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 class ApplicantsController extends Controller
@@ -11,21 +12,38 @@ class ApplicantsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
+    public function index(Request $request){
+    
+     
         if ($request->isMethod('post')) {
+           
+            // vallidate  required inputs
             $this->validate($request, [
                     'surname' => 'required',
-                    'firstname' => 'required',
-                    'phone' => 'required',
+                    'fristName' => 'required',
+                    'photograph' => 'required',
                     'email' => 'required',
-                    'cv' => 'required'
+                    'cv' => 'required',
+                    'photo' => 'required|mimes:jpeg|max:100',
+                    //'cv' => 'required|mimes:doc,docx,pdf|max:2048'
 
                 ]
             );
+
+
+            $cv = $request->cv->getClientOriginalName();
+            $cvcontent = file_get_contents($request->cv);
+            $photo = $request->photograph->getClientOriginalName();
+            $photocontent = file_get_contents($request->photograph);
+
+            // Store the files in storage folder
+            Storage::disk('local')->put($cv, $cvcontent);
+            Storage::disk('local')->put($photo, $photocontent);
+            /// Create applicant record in DB
             Applicant::create($request->all());
-        return view('apply');
+        return route('home');
     }
+    return view('apply');
     }
     /**
      * Show the form for creating a new resource.

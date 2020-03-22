@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('apply');
-// });
+Route::get('/', function () {
+    return view('apply');
+});
 
 Route::match(['GET', 'POST'],'apply', 'ApplicantsController@index');
 Auth::routes();
