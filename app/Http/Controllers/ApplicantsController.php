@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 use App\Applicant;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use DB;
 class ApplicantsController extends Controller
 {
     /**
@@ -24,8 +26,8 @@ class ApplicantsController extends Controller
                     'photograph' => 'required',
                     'email' => 'required',
                     'cv' => 'required',
-                    'photo' => 'required|mimes:jpeg|max:100',
-                    //'cv' => 'required|mimes:doc,docx,pdf|max:2048'
+                    'photograph' => 'required|mimes:jpeg|max:100',
+                    'cv' => 'required|mimes:doc,docx,pdf|max:2048'
 
                 ]
             );
@@ -40,8 +42,18 @@ class ApplicantsController extends Controller
             Storage::disk('local')->put($cv, $cvcontent);
             Storage::disk('local')->put($photo, $photocontent);
             /// Create applicant record in DB
-            Applicant::create($request->all());
-        return route('home');
+
+            // ensure applicants are not more than 4 before inseting to db
+            $count  =Applicant::count(); 
+            if ($count >= 4){
+                return Redirect::back()->with('error', 'Application Closed');
+            }else{
+
+                Applicant::create($request->all()); 
+
+            } 
+           
+            return Redirect::back()->with('success', 'Application Recieved');
     }
     return view('apply');
     }

@@ -9,7 +9,7 @@ class Applicant extends Model
    
     protected $table = "applicants";
     protected $fillable = [
-        'surname', 'firstName', 'phone', 'photo', 'coverLetter', 'photo', 'cv', 'email', 'password',
+        'surname', 'fristName', 'phone', 'photograph', 'coverLetter', 'photo', 'cv', 'email',
     ];
 
     /**

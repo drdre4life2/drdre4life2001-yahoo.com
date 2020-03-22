@@ -23,7 +23,7 @@ class Applicants extends Migration
             $table->text('photograph');
             $table->text('cv');
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at');
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 
