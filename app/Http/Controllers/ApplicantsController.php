@@ -11,7 +11,7 @@ class ApplicantsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         if ($request->isMethod('post')) {
             $this->validate($request, [
@@ -23,9 +23,10 @@ class ApplicantsController extends Controller
 
                 ]
             );
+            Applicant::create($request->all());
         return view('apply');
     }
-
+    }
     /**
      * Show the form for creating a new resource.
      *
